@@ -1,23 +1,14 @@
-<h1>All Flats</h1>
-
-<% @flats.each do |flat| %>
-  <div>
-    <h2><%= link_to flat.name, flat_path(flat) %></h2>
-    <p><%= flat.description %></p>
-    <p>Price: <%= flat.price %> €</p>
-  </div>
-<% end %>
-
-
-
-<h1>Liste des logements</h1>
-
-<% @flats.each do |flat| %>
-  <div>
-    <h2><%= link_to flat.name, flat_path(flat) %></h2>
-    <p><%= flat.description %></p>
-    <p>Prix : <%= flat.price_per_night %> € / nuit</p>
-  </div>
-<% end %>
+<h1>Liste des Flats</h1>
 
 <%= link_to "New Flat", new_flat_path %>
+
+<ul>
+  <% @flats.each do |flat| %>
+    <li>
+      <h2><%= link_to flat.name, flat_path(flat) %></h2>
+      <p><%= flat.description %></p>
+      <p>Prix : <%= flat.price_per_night %> € / nuit</p>
+      <%= link_to "Edit", edit_flat_path(flat) %>
+    </li>
+  <% end %>
+</ul>
