@@ -1,0 +1,23 @@
+<h1>New Flat</h1>
+
+<%= form_with model: @flat, local: true do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+  <div>
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+  <div>
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+  </div>
+  <div>
+    <%= form.submit "Create Flat" %>
+  </div>
+<% end %>
