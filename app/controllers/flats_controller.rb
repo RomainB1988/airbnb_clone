@@ -46,3 +46,9 @@ class FlatsController < ApplicationController
     params.require(:flat).permit(:name, :address, :description, :price_per_night)
   end
 end
+
+def destroy
+  @flat = Flat.find(params[:id])
+  @flat.destroy
+  redirect_to flats_path, notice: "Flat was successfully deleted."
+end

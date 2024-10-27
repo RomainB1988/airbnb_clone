@@ -1,0 +1,36 @@
+<%= form_with model: @flat, local: true do |form| %>
+  <% if @flat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@flat.errors.count, "error") %> prohibited this flat from being saved:</h2>
+      <ul>
+        <% @flat.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :price_per_night %>
+    <%= form.number_field :price_per_night, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :address %>
+    <%= form.text_field :address, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
