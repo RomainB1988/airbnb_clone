@@ -52,6 +52,7 @@ class FlatsController < ApplicationController
 
   # Définit les paramètres autorisés pour un logement
   def flat_params
-    params.require(:flat).permit(:name, :address, :description, :price_per_night)
+    params.require(:flat).permit(:name, :description, :price_per_night, :address, :image_url)
   end
+
 end

@@ -1,10 +1,66 @@
-<h1><%= @flat.name %></h1>
-<p><%= @flat.description %></p>
-<p>Prix : <%= @flat.price_per_night %> €</p>
-<p>Adresse : <%= @flat.address %></p>
+<div class="container my-5">
+  <div class="card mx-auto" style="max-width: 600px;">
+    <%= image_tag(@flat.image_url.presence || 'https://via.placeholder.com/600x400', class: "card-img-top", alt: @flat.name) %>
+    <div class="card-body">
+      <h1 class="card-title text-center"><%= @flat.name %></h1>
+      <p class="card-text"><%= @flat.description %></p>
+      <p><strong>Prix :</strong> <%= @flat.price_per_night %> € / nuit</p>
+      <p><strong>Adresse :</strong> <%= @flat.address %></p>
+      <div class="text-center mt-4">
+        <%= link_to "Editer", edit_flat_path(@flat), class: "btn btn-secondary mx-1" %>
+        <%= link_to "Supprimer", flat_path(@flat), method: :delete, data: { confirm: "Êtes-vous sûr de vouloir supprimer ce logement ?" }, class: "btn btn-danger mx-1" %>
+        <%= link_to "Retour à la liste", flats_path, class: "btn btn-primary mx-1" %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to "Edit", edit_flat_path(@flat), class: "btn btn-primary" %>
-<%= link_to "Delete", flat_path(@flat), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+
+<h2>Réserver cet appartement</h2>
+<%= form_with model: [@flat, @flat.reservations.build], local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :start_date, "Date de début" %>
+    <%= form.date_field :start_date, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :end_date, "Date de fin" %>
+    <%= form.date_field :end_date, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Réserver", class: "btn btn-primary" %>
+  </div>
+<% end %>
 
 
-<%= link_to "Retour à la liste des flats", flats_path %>
+<h3>Réservations</h3>
+<% @flat.reservations.each do |reservation| %>
+  <p>Réservé du <%= reservation.start_date %> au <%= reservation.end_date %></p>
+<% end %>
+
+
+<h2>Ajouter un commentaire</h2>
+
+<%= form_with model: [@flat, Comment.new], local: true do |form| %>
+  <div>
+    <%= form.label :rating, "Note (1 à 5)" %>
+    <%= form.number_field :rating, min: 1, max: 5 %>
+  </div>
+  <div>
+    <%= form.label :content, "Commentaire" %>
+    <%= form.text_area :content %>
+  </div>
+  <div>
+    <%= form.submit "Ajouter un commentaire", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+
+<h3>Commentaires</h3>
+
+<% @flat.comments.each do |comment| %>
+  <div>
+    <p><strong><%= comment.user.email %></strong> - Note : <%= comment.rating %> / 5</p>
+    <p><%= comment.content %></p>
+    <hr>
+  </div>
+<% end %>
