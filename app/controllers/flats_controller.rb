@@ -1,4 +1,6 @@
 class FlatsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+
   # Affiche tous les logements
   def index
     @flats = Flat.all
@@ -39,16 +41,17 @@ class FlatsController < ApplicationController
     end
   end
 
+  # Supprime un logement
+  def destroy
+    @flat = Flat.find(params[:id])
+    @flat.destroy
+    redirect_to flats_path, notice: "Flat was successfully deleted."
+  end
+
   private
 
   # Définit les paramètres autorisés pour un logement
   def flat_params
     params.require(:flat).permit(:name, :address, :description, :price_per_night)
   end
-end
-
-def destroy
-  @flat = Flat.find(params[:id])
-  @flat.destroy
-  redirect_to flats_path, notice: "Flat was successfully deleted."
 end

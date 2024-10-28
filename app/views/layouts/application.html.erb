@@ -6,11 +6,31 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <!-- Ajout de rails-ujs via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@rails/ujs@7.0.4/lib/assets/compiled/rails-ujs.js"></script>
+    <script>
+      Rails.start(); // Démarre Rails UJS pour activer la méthode delete
+    </script>
   </head>
 
   <body>
+    <header>
+      <nav>
+      <%= link_to "Accueil", root_path %>
+      <% if user_signed_in? %>
+      <%= link_to "Déconnexion", destroy_user_session_path, method: :delete %>
+      <%= link_to "Mon profil", edit_user_registration_path %>
+      <% else %>
+      <%= link_to "Connexion", new_user_session_path %>
+      <%= link_to "Inscription", new_user_registration_path %>
+      <% end %>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>

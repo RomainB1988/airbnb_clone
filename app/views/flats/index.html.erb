@@ -1,13 +1,16 @@
-<h1>Liste des Appartements</h1>
+<h1 class="text-center my-4">Liste des Appartements</h1>
 
-
-<% @flats.each do |flat| %>
-  <div>
-    <h2><%= link_to flat.name, flat_path(flat) %></h2>
-    <p><%= flat.description %></p>
-    <p>Prix : <%= flat.price_per_night %> € / nuit</p>
-    <%= link_to "New Flat", new_flat_path %>
-    <%= link_to "Edit", edit_flat_path(flat) %>
-    <%= link_to "Delete", flat_path(flat), method: :delete, data: { confirm: "Are you sure you want to delete this flat?" } %>
-  </div>
-<% end %>
+<div class="container">
+  <% @flats.each do |flat| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="card-title"><%= link_to flat.name, flat_path(flat), class: "text-decoration-none" %></h2>
+        <p class="card-text"><%= flat.description %></p>
+        <p class="card-text font-weight-bold">Prix : <%= flat.price_per_night %> € / nuit</p>
+        <%= link_to "Edit", edit_flat_path(flat), class: "btn btn-warning mr-2" %>
+        <%= link_to "Delete", flat_path(flat), method: :delete, data: { confirm: "Are you sure you want to delete this flat?" }, class: "btn btn-danger" %>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to "New Flat", new_flat_path, class: "btn btn-primary mt-3" %>
+</div>

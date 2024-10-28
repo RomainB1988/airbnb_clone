@@ -1,6 +1,6 @@
-<%= form_with model: @flat, local: true do |form| %>
+<%= form_with model: @flat, local: true, class: "mt-4" do |form| %>
   <% if @flat.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert alert-danger">
       <h2><%= pluralize(@flat.errors.count, "error") %> prohibited this flat from being saved:</h2>
       <ul>
         <% @flat.errors.full_messages.each do |message| %>
@@ -30,7 +30,5 @@
     <%= form.text_field :address, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit class: "btn btn-primary" %>
-  </div>
+  <%= form.submit class: "btn btn-success" %>
 <% end %>
