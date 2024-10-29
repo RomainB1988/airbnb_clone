@@ -1,39 +1,45 @@
-<%= form_with model: @flat, local: true, class: "mt-4" do |form| %>
-  <% if @flat.errors.any? %>
-    <div class="alert alert-danger">
-      <h2><%= pluralize(@flat.errors.count, "error") %> prohibited this flat from being saved:</h2>
-      <ul>
-        <% @flat.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+<!-- app/views/flats/_form.html.erb -->
+<div class="container my-5">
+  <div class="card shadow">
+    <div class="card-body">
+      <h1 class="card-title text-center"><%= @flat.new_record? ? "Ajouter un logement" : "Modifier le logement" %></h1>
+      <%= form_with model: @flat, local: true do |form| %>
+        <% if @flat.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+            <h2><%= pluralize(@flat.errors.count, "error") %> ont empêché la sauvegarde :</h2>
+            <ul>
+              <% @flat.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="form-group">
+          <%= form.label :name %>
+          <%= form.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :description %>
+          <%= form.text_area :description, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :price_per_night %>
+          <%= form.number_field :price_per_night, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :address %>
+          <%= form.text_field :address, class: "form-control" %>
+        </div>
+
+        <div class="form-group text-center mt-4">
+          <%= form.submit class: "btn btn-primary" %>
+          <%= link_to "Annuler", flats_path, class: "btn btn-secondary ml-2" %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "form-control" %>
   </div>
-
-  <div class="form-group">
-    <%= form.label :description %>
-    <%= form.text_area :description, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :price_per_night %>
-    <%= form.number_field :price_per_night, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :address %>
-    <%= form.text_field :address, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :image_url %>
-    <%= form.text_field :image_url, class: "form-control" %>
-  </div>
-
-  <%= form.submit class: "btn btn-success" %>
-<% end %>
+</div>
