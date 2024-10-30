@@ -93,7 +93,7 @@ group :test do
 end
 
 gem "sassc-rails", "~> 2.1"
-# Gemfile
+
 group :production do
   gem 'rails_12factor'
 end
