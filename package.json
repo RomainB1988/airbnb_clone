@@ -3,8 +3,8 @@
   "private": "true",
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "5",
-    "sass": "^1.80.3"
+    "bootstrap": "^5.3.3",
+    "sass": "^1.80.5"
   },
   "scripts": {
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
