@@ -2,8 +2,14 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+<<<<<<< HEAD
     "bootstrap": "^5.3.3",
     "sass": "^1.80.3"
+=======
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
+    "sass": "^1.80.5"
+>>>>>>> 84d9cfda95a49d78fd97e6226284c5f1a697e171
   },
   "scripts": {
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
